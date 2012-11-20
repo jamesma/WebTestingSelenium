@@ -1,0 +1,70 @@
+P ["", "Teacher 1", "Fall 2012", "1", "2", "3", "M", "Substitute 1"]
+
+F ["   ", "Teacher 1", "Fall 2012", "1", "2", "3", "M", "Substitute 1"] : Violation of R-1 - only alphabets and numbers are allowed
+
+F ["CS!", "Teacher 1", "Fall 2012", "1", "2", "3", "M", "Substitute 1"] : Violation of R-1 - only alphabets and numbers are allowed
+
+F ["123/", "Teacher 1", "Fall 2012", "1", "2", "3", "M", "Substitute 1"] : Violation of R-1 - only alphabets and numbers are allowed
+
+F ["CS123@", "Teacher 1", "Fall 2012", "1", "2", "3", "M", "Substitute 1"] : Violation of R-1 - only alphabets and numbers are allowed
+
+F ["CS", "Teacher 1", "Fall 2012", "abc", "2", "3", "M", "Substitute 1"] : Violation of R-2 - only numbers are allowed
+
+F ["CS", "Teacher 1", "Fall 2012", "123abc", "2", "3", "M", "Substitute 1"] : Violation of R-2 - only numbers are allowed
+
+F ["CS", "Teacher 1", "Fall 2012", "123@", "2", "3", "M", "Substitute 1"] : Violation of R-2 - only numbers are allowed
+
+F ["CS", "Teacher 1", "Fall 2012", "", "2", "3", "M", "Substitute 1"] : Violation of R-2 - only numbers are allowed
+
+F ["CS", "Teacher 1", "Fall 2012", "   ", "2", "3", "M", "Substitute 1"] : Violation of R-2 - only numbers are allowed
+
+F ["CS", "Teacher 1", "Fall 2012", "1", "abc", "3", "M", "Substitute 1"] : Violation of R-3 - only numbers are allowed
+
+F ["CS", "Teacher 1", "Fall 2012", "1", "123abc", "3", "M", "Substitute 1"] : Violation of R-3 - only numbers are allowed
+
+F ["CS", "Teacher 1", "Fall 2012", "1", "123@", "3", "M", "Substitute 1"] : Violation of R-3 - only numbers are allowed
+
+P ["CS", "Teacher 1", "Fall 2012", "1", "", "3", "M", "Substitute 1"]
+
+F ["CS", "Teacher 1", "Fall 2012", "1", "   ", "3", "M", "Substitute 1"] : Violation of R-3 - only numbers are allowed
+
+F ["CS", "Teacher 1", "Fall 2012", "1", "2", "abc", "M", "Substitute 1"] : Violation of R-4 - only numbers are allowed
+
+F ["CS", "Teacher 1", "Fall 2012", "1", "2", "123abc", "M", "Substitute 1"] : Violation of R-4 - only numbers are allowed
+
+F ["CS", "Teacher 1", "Fall 2012", "1", "2", "123@", "M", "Substitute 1"] : Violation of R-4 - only numbers are allowed
+
+P ["CS", "Teacher 1", "Fall 2012", "1", "2", "", "M", "Substitute 1"]
+
+F ["CS", "Teacher 1", "Fall 2012", "1", "2", "   ", "M", "Substitute 1"] : Violation of R-4 - only numbers are allowed
+
+F ["<script>XSS attacked</script>", "Teacher 1", "Fall 2012", "1", "2", "123", "M", "Substitute 1"] : Violation of R-5 - Xss vulnerability exists
+
+F ["CS", "Teacher 1", "Fall 2012", "<script>XSS attacked</script>", "2", "3", "M", "Substitute 1"] : Violation of R-5 - Xss vulnerability exists
+
+F ["CS", "Teacher 1", "Fall 2012", "1", "<script>XSS attacked</script>", "3", "M", "Substitute 1"] : Violation of R-5 - Xss vulnerability exists
+
+F ["CS", "Teacher 1", "Fall 2012", "1", "2", "<script>XSS attacked</script>", "M", "Substitute 1"] : Violation of R-5 - Xss vulnerability exists
+
+P ["CS", "Teacher 1", "Fall 2012", "1", "2", "3", "M", "Substitute 1"]
+
+P ["123", "Teacher 1", "Fall 2012", "1", "2", "3", "M", "Substitute 1"]
+
+P ["CS123", "Teacher 1", "Fall 2012", "1", "2", "3", "M", "Substitute 1"]
+
+P ["CS", "Teacher 1", "Fall 2012", "123", "2", "3", "M", "Substitute 1"]
+
+P ["CS", "Teacher 1", "Fall 2012", "1", "123", "3", "M", "Substitute 1"]
+
+P ["CS", "Teacher 1", "Fall 2012", "1", "2", "123", "M", "Substitute 1"]
+
+P ["CS", "Teacher 1", "Fall 2012", "1", "2", "3", "M", "Substitute 1"]
+
+P ["CS", "Teacher 2", "Spring 2013", "1", "2", "3", "T", "Substitute 2"]
+
+P ["CS", "Teacher 3", "Fall 2012", "1", "2", "3", "W", "Substitute 3"]
+
+P ["CS", "Teacher 4", "Spring 2013", "1", "2", "3", "H", "Substitute 1"]
+
+F ["CS", "Teacher 5", "Fall 2012", "1", "2", "3", "F", "Substitute 2"] : Violation of R-7 - class record values are not same as those entered or selected << teacher
+
