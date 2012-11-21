@@ -34,13 +34,6 @@ public class WebTester {
     }
     
     /**
-     * Quit WebDriver.
-     */
-    private void quitWebDriver() {
-        driver.quit();
-    }
-    
-    /**
      * Login as admin with credentials.
      */
     private void performAdminLogin() {
@@ -73,27 +66,16 @@ public class WebTester {
     }
     
     /**
-     * Delete the single class if it exists under Manage Classes.
+     * Delete class record by index of the classes table.
+     * 
+     * @param index
      */
-    private void deleteClassesIfExists() {
-        Select semesterDropdown = new Select(driver.findElement(By.xpath("/html/body/table[2]/tbody/tr[2]/td[@class='w']/table/tbody/tr/td/form/select")));
-        semesterDropdown.selectByVisibleText("All");
-        
-        try {
-            // explicit wait
-            Thread.sleep(100);
-        } catch (InterruptedException ex) {
-            ex.printStackTrace();
-        }
+    private void deleteClassByIndex(int index) {
+        navigateToAllSemesters();
         
         List<WebElement> checkboxes = driver.findElements(By.xpath("/html/body/table[2]/tbody/tr[2]/td[@class='w']/table/tbody/tr/td/form/table[1]/tbody/tr/td/table[@class='dynamiclist']/tbody//input"));
 
-        // no class exists
-        if (checkboxes.isEmpty())
-            return;
-        
-        for (WebElement checkbox : checkboxes)
-                checkbox.click();
+        checkboxes.get(index).click();
         
         // click delete button
         WebElement deleteButton = driver.findElement(By.xpath("/html/body/table[2]/tbody/tr[2]/td[@class='w']/table/tbody/tr/td/form/table[1]/tbody/tr/td/input[7]"));
@@ -107,21 +89,42 @@ public class WebTester {
     }
     
     /**
-     * Return AddClassTestResult after checking WebElements and validity of AddClassTestCase.
-     * 
-     * @param testCase
-     * @return
+     * Click on Add button
      */
-    private AddClassTestResult generateTestResult(AddClassTestCase testCase) {
-        
+    private void performAddClass() {
         // click on add button
         WebElement addClassButton = driver.findElement(By.xpath("/html/body/table[2]/tbody/tr[2]/td[@class='w']/table/tbody/tr/td/form/table[2]/tbody/tr/td/input[6]"));
         addClassButton.click();
+    }
+    
+    /**
+     * Select "All" from semester dropdown
+     */
+    private void navigateToAllSemesters() {
+        String semesterDropdownXpath = "/html/body/table[2]/tbody/tr[2]/td[@class='w']/table/tbody/tr/td/form/select";
+        
+        // click on "All" in semester dropdown
+        Select semesterDropdown = new Select(driver.findElement(By.xpath(semesterDropdownXpath)));
+        semesterDropdown.selectByVisibleText("All");
+        
+        waitUntilDropdownSelected("All", semesterDropdownXpath, 5);
+    }
+    
+    /**
+     * Return AddClassTestResult after checking WebElements and validity of AddClassTestCase.
+     * 
+     * @param testCase
+     * @param beforeCount
+     * @param afterCount
+     * @return
+     */
+    private AddClassTestResult generateTestResult(AddClassTestCase testCase, int beforeCount, int afterCount) {
+        navigateToAllSemesters();
         
         AddClassTestResult testResult = null;
         
         try {
-            RequirementViolationChecker.checkRequirementViolation(driver, testCase);
+            RequirementViolationChecker.checkRequirementViolation(driver, testCase, beforeCount, afterCount);
             testResult = new AddClassTestResult(
                     true, 
                     testCase.getClassName(), 
@@ -215,6 +218,17 @@ public class WebTester {
     }
     
     /**
+     * Get number of class records in table and return the count.
+     * @return
+     */
+    private int getClassRecordCount() {
+        navigateToAllSemesters();
+        
+        List<WebElement> classnames = driver.findElements(By.xpath("/html/body/table[2]/tbody/tr[2]/td[@class='w']/table/tbody/tr/td/form/table[1]/tbody/tr/td/table[@class='dynamiclist']/tbody/tr//td[2]"));
+        return classnames.size();
+    }
+    
+    /**
      * Helper method for doing an explicit wait (seconds) until a tag with text appears.
      * 
      * @param tagName
@@ -250,37 +264,72 @@ public class WebTester {
             }
         });
     }
+    
+    /**
+     * Helper method for doing an explicit wait (seconds) until an option is selected in a dropdown.
+     * 
+     * @param optionString the select element text
+     * @param xpath - Xpath string for locating the dropdown WebElement
+     * @param seconds
+     */
+    private void waitUntilDropdownSelected(final String optionString, final String xpath, final int seconds) {
+        (new WebDriverWait(driver, seconds)).until(new ExpectedCondition<Boolean>() {
+            public Boolean apply(WebDriver driver) {
+                Select dropdown = new Select(driver.findElement(By.xpath(xpath)));
+                WebElement selectedOption = dropdown.getFirstSelectedOption();
+                if (selectedOption.getText().equals(optionString))
+                    return true;
+                return false;
+            }
+        });
+    }
 
-    public static void main(String[] args) {
-        WebTester webTester = new WebTester(WEBSITE_ROOT);
-        
+    /**
+     * Begin test suite for Selenium.
+     */
+    private void beginTest() {
         // initialize testCases and testResults
         ArrayList<AddClassTestCase> testCases = InputParser.getAddClassTestCases(INPUT_FILE_NAME);
         ArrayList<AddClassTestResult> testResults = new ArrayList<AddClassTestResult>();
         
         // login as admin
-        webTester.performAdminLogin();
+        performAdminLogin();
         
         // iterate over each test case
         for (AddClassTestCase testCase : testCases) {
+            // get number of classes BEFORE add
+            int beforeCount = getClassRecordCount();
+            
             // navigate to "Add Class"
-            webTester.navigateToAddClassPanel();
+            navigateToAddClassPanel();
             
             // fill in input values defined in test case
-            webTester.fillInTestCaseValues(testCase);
+            fillInTestCaseValues(testCase);
+            
+            // add class
+            performAddClass();
+            
+            // get number of classes AFTER add
+            int afterCount = getClassRecordCount();
             
             // generate test result and add to ArrayList of test results
-            testResults.add(webTester.generateTestResult(testCase));
+            testResults.add(generateTestResult(testCase, beforeCount, afterCount));
             
-            // delete classes for next iteration
-            webTester.deleteClassesIfExists();
+            // delete class for this test case if it was added successfully
+            if (RequirementViolationChecker.isClassRecordAddedSuccessfully(beforeCount, afterCount))
+                deleteClassByIndex(afterCount-1);
         }
         
         // write test results to file
         TestResultWriter.writeTestResultsToFile(OUTPUT_FILE_NAME, testResults);
         
         // quit WebDriver
-        webTester.quitWebDriver();
+        driver.quit();
+    }
+    
+    public static void main(String[] args) {
+        WebTester webTester = new WebTester(WEBSITE_ROOT);
+        webTester.beginTest();
     }
 
 }
