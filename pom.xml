@@ -6,6 +6,9 @@
         <groupId>WebTestingSelenium</groupId>
         <artifactId>WebTestingSelenium</artifactId>
         <version>1.0</version>
+        <properties>
+            <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        </properties>
         <dependencies>
             <dependency>
                 <groupId>org.seleniumhq.selenium</groupId>
