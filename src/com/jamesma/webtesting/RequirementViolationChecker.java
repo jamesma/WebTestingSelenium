@@ -1,5 +1,6 @@
 package com.jamesma.webtesting;
 
+import static com.jamesma.webtesting.Constants.CLASSES_PER_PAGE;
 import static com.jamesma.webtesting.Constants.CLASSNAME;
 import static com.jamesma.webtesting.Constants.CLASS_RECORD_NOT_ADDED_SUCCESSFULLY_ERROR;
 import static com.jamesma.webtesting.Constants.CLASS_RECORD_NOT_SAME_AS_INPUT_ERROR;
@@ -32,6 +33,12 @@ import org.openqa.selenium.WebElement;
 
 public class RequirementViolationChecker {
     
+    private static WebTester webTester;
+    
+    public static void setWebTester(WebTester webTester) {
+        RequirementViolationChecker.webTester = webTester;
+    }
+    
     /**
      * Check if testCase has a requirement violation.
      * 
@@ -39,7 +46,7 @@ public class RequirementViolationChecker {
      * if input is valid
      *     check class record is added successfully
      *     check class record is exactly same as input
-     * else if class record added successfully
+     * if class record added successfully and input is invalid
      *     check R-1 to R-5 for requirement violations
      * 
      * @param driver
@@ -55,19 +62,21 @@ public class RequirementViolationChecker {
             ClassRecord classRecord = ensureClassRecordAddedSuccessfully(driver, R6, beforeCount, afterCount);
             // R7
             ensureClassRecordSameAsInput(classRecord, R7, testCase);
-        } else {
-            if (isClassRecordAddedSuccessfully(beforeCount, afterCount)) {
-                // R5
-                ensureNoXssVulnerability(driver, R5);
-                // R1
-                ensureOnlyNumbersAndAlphabets(R1, testCase.getClassName());
-                // R2
-                ensureOnlyNumbers(R2, testCase.getSectionNumber());
-                // R3
-                ensureOnlyNumbers(R3, testCase.getRoomNumber());
-                // R4
-                ensureOnlyNumbers(R4, testCase.getPeriodNumber());
-            }
+        }
+        
+        if (!isInputValid(testCase) && isClassRecordAddedSuccessfully(beforeCount, afterCount)) {
+            ClassRecord addedRecord = getClassRecordByIndex(driver, afterCount - 1);
+            
+            // R5
+            ensureNoXssVulnerability(driver, R5, afterCount);
+            // R1
+            ensureOnlyNumbersAndAlphabets(R1, addedRecord.getClassName());
+            // R2
+            ensureOnlyNumbers(R2, addedRecord.getSectionNumber());
+            // R3
+            ensureOnlyNumbers(R3, addedRecord.getRoomNumber());
+            // R4
+            ensureOnlyNumbers(R4, addedRecord.getPeriodNumber());
         }
         
         // no requirement violation if code reaches here
@@ -128,19 +137,31 @@ public class RequirementViolationChecker {
     }
 
     /**
-     * Navigate to "Classes" and check if XSS vulnerability exists
-     * by searching for script tags within all text fields.
+     * Navigate to "Classes" and check if XSS vulnerability exists within the text fields of ClassRecord by
+     * searching for script tags within text fields.
+     * 
+     * NOTE: xpathQuery's normalizedIndex is not zero-indexed.
+     * NOTE: normalizedIndex must account for header row.
      * 
      * @param driver
      * @param req
+     * @param index - not zero-indexed
      * @throws RequirementViolationException if vulnerability exists
      */
-    public static void ensureNoXssVulnerability(WebDriver driver, String req) throws RequirementViolationException {
-        List<WebElement> textFields = driver.findElements(By.xpath("/html/body/table[2]/tbody/tr[2]/td[@class='w']/table/tbody/tr/td/form/table[1]/tbody/tr/td/table[@class='dynamiclist']/tbody/tr"));
+    public static void ensureNoXssVulnerability(WebDriver driver, String req, int index) throws RequirementViolationException {
+        int pageCount = webTester.navigateToLastPage();
         
+        // coerce index accordingly to page numbers
+        // add one to index to account for the header row
+        int normalizedIndex = index - ((pageCount - 1) * CLASSES_PER_PAGE) + 1;
+        
+        String xpathQuery = "(/html/body/table[2]/tbody/tr[2]/td[@class='w']/table/tbody/tr/td/form/table[1]/tbody/tr/td/table[@class='dynamiclist']/tbody/tr)" + "[" + normalizedIndex + "]";
+        
+        List<WebElement> textFields = driver.findElements(By.xpath(xpathQuery));
+
         for (WebElement textField : textFields) {
             List<WebElement> tags = textField.findElements(By.tagName("script"));
-            
+
             if (!tags.isEmpty())
                 throw new RequirementViolationException(req + " - " + XSS_VULNERABILITY_EXISTS_ERROR);
         }
@@ -184,6 +205,10 @@ public class RequirementViolationChecker {
      * @return
      */
     public static ClassRecord getClassRecordByIndex(WebDriver driver, int index) {
+        int pageCount = webTester.navigateToLastPage();
+        
+        // coerce index accordingly to page numbers
+        int normalizedIndex = index - ((pageCount - 1) * CLASSES_PER_PAGE);
 
         List<WebElement> classnames     = null;
         List<WebElement> teachers       = null;
@@ -204,14 +229,14 @@ public class RequirementViolationChecker {
         substitutes =    driver.findElements(By.xpath("/html/body/table[2]/tbody/tr[2]/td[@class='w']/table/tbody/tr/td/form/table[1]/tbody/tr/td/table[@class='dynamiclist']/tbody/tr//td[9]"));
 
         return new ClassRecord(
-                classnames      .get(index).getText(), 
-                teachers        .get(index).getText(), 
-                semesters       .get(index).getText(), 
-                sectionNumbers  .get(index).getText(), 
-                roomNumbers     .get(index).getText(), 
-                periodNumbers   .get(index).getText(), 
-                substitutes     .get(index).getText(), 
-                dayOfTheWeeks   .get(index).getText());
+                classnames      .get(normalizedIndex).getText(), 
+                teachers        .get(normalizedIndex).getText(), 
+                semesters       .get(normalizedIndex).getText(), 
+                sectionNumbers  .get(normalizedIndex).getText(), 
+                roomNumbers     .get(normalizedIndex).getText(), 
+                periodNumbers   .get(normalizedIndex).getText(), 
+                substitutes     .get(normalizedIndex).getText(), 
+                dayOfTheWeeks   .get(normalizedIndex).getText());
     }
     
     /**

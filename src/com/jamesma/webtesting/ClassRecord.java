@@ -49,5 +49,13 @@ public class ClassRecord {
     public String getDayOfTheWeek() {
         return dayOfTheWeek;
     }
+    @Override
+    public String toString() {
+        return "ClassRecord [className=" + className + ", teacher=" + teacher
+                + ", semester=" + semester + ", sectionNumber=" + sectionNumber
+                + ", roomNumber=" + roomNumber + ", periodNumber="
+                + periodNumber + ", substitute=" + substitute
+                + ", dayOfTheWeek=" + dayOfTheWeek + "]";
+    }
 
 }

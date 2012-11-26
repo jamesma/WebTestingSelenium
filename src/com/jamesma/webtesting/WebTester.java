@@ -7,6 +7,7 @@ import static com.jamesma.webtesting.Constants.FIREFOX_DRIVER_PROPERTY;
 import static com.jamesma.webtesting.Constants.INPUT_FILE_NAME;
 import static com.jamesma.webtesting.Constants.OUTPUT_FILE_NAME;
 import static com.jamesma.webtesting.Constants.WEBSITE_ROOT;
+import static com.jamesma.webtesting.Constants.CLASSES_PER_PAGE;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -68,14 +69,20 @@ public class WebTester {
     /**
      * Delete class record by index of the classes table.
      * 
+     * NOTE: This method assumes that the entry you're deleting is located at the
+     * last page. Refactor if you're intending to delete entries not located at the last page.
+     * 
      * @param index
      */
     private void deleteClassByIndex(int index) {
-        navigateToAllSemesters();
+        int pageCount = navigateToLastPage();
+        
+        // coerce index accordingly to page numbers
+        int normalizedIndex = index - ((pageCount - 1) * CLASSES_PER_PAGE);
         
         List<WebElement> checkboxes = driver.findElements(By.xpath("/html/body/table[2]/tbody/tr[2]/td[@class='w']/table/tbody/tr/td/form/table[1]/tbody/tr/td/table[@class='dynamiclist']/tbody//input"));
 
-        checkboxes.get(index).click();
+        checkboxes.get(normalizedIndex).click();
         
         // click delete button
         WebElement deleteButton = driver.findElement(By.xpath("/html/body/table[2]/tbody/tr[2]/td[@class='w']/table/tbody/tr/td/form/table[1]/tbody/tr/td/input[7]"));
@@ -219,13 +226,50 @@ public class WebTester {
     
     /**
      * Get number of class records in table and return the count.
+     * 
      * @return
      */
     private int getClassRecordCount() {
-        navigateToAllSemesters();
+        int pageCount = navigateToLastPage();
         
         List<WebElement> classnames = driver.findElements(By.xpath("/html/body/table[2]/tbody/tr[2]/td[@class='w']/table/tbody/tr/td/form/table[1]/tbody/tr/td/table[@class='dynamiclist']/tbody/tr//td[2]"));
-        return classnames.size();
+        
+        // each page has max of CLASSES_PER_PAGE records
+        return ((pageCount - 1) * CLASSES_PER_PAGE) + classnames.size();
+    }
+    
+    /**
+     * Navigate to last page and return page count.
+     * 
+     * @return
+     */
+    public int navigateToLastPage() {
+        List<WebElement> pageLinks = grabPageLinks();
+        int pageCount = (pageLinks.size() == 0) ? 1 : pageLinks.size();
+        
+        // navigate to last page if there are more than one page
+        if (pageCount > 1) {
+            pageLinks.get(pageCount - 1).click();
+            
+            // wait for a set amount of time
+            try {
+                Thread.sleep(100);
+            } catch (InterruptedException ex) {
+                ex.printStackTrace();
+            }
+        }
+        
+        return pageCount;
+    }
+    
+    /**
+     * Return the WebElements of page links.
+     * 
+     * @return
+     */
+    private List<WebElement> grabPageLinks() {
+        navigateToAllSemesters();
+        return driver.findElements(By.xpath("/html/body/table[2]/tbody/tr[2]/td[@class='w']/table/tbody/tr/td/form/table[1]/tbody/tr/td/center/a"));
     }
     
     /**
@@ -285,12 +329,54 @@ public class WebTester {
     }
 
     /**
+     * Delete all classes. This is a convenience method and is not utilized by actual test suite.
+     * 
+     * @param count
+     */
+    @SuppressWarnings("unused")
+    private void deleteAllClasses() {
+        performAdminLogin();
+        
+        int prevPageCount = -1;
+        int currentPageCount;
+        
+        while ((currentPageCount = navigateToLastPage()) != prevPageCount) {
+            List<WebElement> checkboxes = driver.findElements(By.xpath("/html/body/table[2]/tbody/tr[2]/td[@class='w']/table/tbody/tr/td/form/table[1]/tbody/tr/td/table[@class='dynamiclist']/tbody//input"));
+            
+            // select all classes by checkboxes
+            for (WebElement checkbox : checkboxes)
+                checkbox.click();
+            
+            // click delete button
+            WebElement deleteButton = driver.findElement(By.xpath("/html/body/table[2]/tbody/tr[2]/td[@class='w']/table/tbody/tr/td/form/table[1]/tbody/tr/td/input[7]"));
+            deleteButton.click();
+            
+            // hit OK in alert dialog
+            Alert alertDialog = driver.switchTo().alert();
+            alertDialog.accept();
+            
+            waitUntilTagAppears("h1", "Manage Classes", 5);
+            
+            prevPageCount = currentPageCount;
+        }
+        
+        driver.quit();
+        
+        System.out.println("Selenium has deleted all classes.");
+    }
+
+    /**
      * Begin test suite for Selenium.
      */
     private void beginTest() {
+        System.out.println("Selenium test beginning. Test cases are located in " + INPUT_FILE_NAME + ".");
+        
         // initialize testCases and testResults
         ArrayList<AddClassTestCase> testCases = InputParser.getAddClassTestCases(INPUT_FILE_NAME);
         ArrayList<AddClassTestResult> testResults = new ArrayList<AddClassTestResult>();
+        
+        // compose RequirementViolationChecker with self
+        RequirementViolationChecker.setWebTester(this);
         
         // login as admin
         performAdminLogin();
@@ -325,11 +411,18 @@ public class WebTester {
         
         // quit WebDriver
         driver.quit();
+        
+        // remove RequirementViolationChecker's object compositions
+        RequirementViolationChecker.setWebTester(null);
+        
+        System.out.println("Selenium test complete. Test results are located in " + OUTPUT_FILE_NAME + ".");
     }
     
     public static void main(String[] args) {
         WebTester webTester = new WebTester(WEBSITE_ROOT);
         webTester.beginTest();
+        
+//        webTester.deleteAllClasses();
     }
 
 }

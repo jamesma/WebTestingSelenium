@@ -49,14 +49,14 @@ public class InputParser {
         //["cn1", "t1", "s1", "11", "1234", "1", "name1", "M"]
         String testCaseRegex = 
                 "\\[" + 
-                "\"(\\p{ASCII}*)\",\\s*" + 
-                "\"(\\p{ASCII}*)\",\\s*" +
-                "\"(\\p{ASCII}*)\",\\s*" + 
-                "\"(\\p{ASCII}*)\",\\s*" +
-                "\"(\\p{ASCII}*)\",\\s*" + 
-                "\"(\\p{ASCII}*)\",\\s*" +
-                "\"(\\p{ASCII}*)\",\\s*" + 
-                "\"(\\p{ASCII}*)\"\\s*" +
+                "\"(.*)\",\\s*" + 
+                "\"(.*)\",\\s*" +
+                "\"(.*)\",\\s*" + 
+                "\"(.*)\",\\s*" +
+                "\"(.*)\",\\s*" + 
+                "\"(.*)\",\\s*" +
+                "\"(.*)\",\\s*" + 
+                "\"(.*)\"\\s*" +
                 "\\]";
 
         Pattern pattern = Pattern.compile(testCaseRegex);
