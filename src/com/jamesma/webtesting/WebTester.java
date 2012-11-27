@@ -8,6 +8,8 @@ import static com.jamesma.webtesting.Constants.INPUT_FILE_NAME;
 import static com.jamesma.webtesting.Constants.OUTPUT_FILE_NAME;
 import static com.jamesma.webtesting.Constants.WEBSITE_ROOT;
 import static com.jamesma.webtesting.Constants.CLASSES_PER_PAGE;
+import static com.jamesma.webtesting.Constants.NIST_INPUT_FILE_NAME;
+import static com.jamesma.webtesting.Constants.NIST_OUTPUT_FILE_NAME;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,6 +24,8 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
+
+import com.jamesma.webtesting.utils.NistConvertor;
 
 public class WebTester {
     
@@ -423,6 +427,7 @@ public class WebTester {
         webTester.beginTest();
         
 //        webTester.deleteAllClasses();
+//        NistConvertor.convertNistToAddClassTestCaseFormat(NIST_INPUT_FILE_NAME, NIST_OUTPUT_FILE_NAME);
     }
 
 }

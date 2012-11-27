@@ -7,6 +7,12 @@ import java.util.ArrayList;
 
 public class TestResultWriter {
     
+    /**
+     * Write test results to outfile file.
+     * 
+     * @param fileName
+     * @param testResults
+     */
     public static void writeTestResultsToFile(String fileName, ArrayList<AddClassTestResult> testResults) {
         BufferedWriter writer = null;
         try {

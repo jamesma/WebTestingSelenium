@@ -7,11 +7,13 @@ public class Constants {
     public static final String WEBSITE_ROOT             = "http://localhost:8888/";
     public static final String INPUT_FILE_NAME          = "input1";
     public static final String OUTPUT_FILE_NAME         = "output1";
+    public static final String NIST_INPUT_FILE_NAME     = "input2-nist.txt";
+    public static final String NIST_OUTPUT_FILE_NAME    = "input2";
     
     public static final String ADMIN_USERNAME = "admin";
     public static final String ADMIN_PASSWORD = "admin";
     
-    public static final String VIOLATION = "Violation of ";
+    public static final String VIOLATION = "";
     public static final String R1 = VIOLATION + "R-1";
     public static final String R2 = VIOLATION + "R-2";
     public static final String R3 = VIOLATION + "R-3";

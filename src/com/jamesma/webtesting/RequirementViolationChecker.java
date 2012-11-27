@@ -67,19 +67,57 @@ public class RequirementViolationChecker {
         if (!isInputValid(testCase) && isClassRecordAddedSuccessfully(beforeCount, afterCount)) {
             ClassRecord addedRecord = getClassRecordByIndex(driver, afterCount - 1);
             
+            ArrayList<RequirementViolationException> violationExceptions = new ArrayList<RequirementViolationException>();
+            
             // R5
-            ensureNoXssVulnerability(driver, R5, afterCount);
+            try {
+                ensureNoXssVulnerability(driver, R5, afterCount);
+            } catch (RequirementViolationException ex) {
+                violationExceptions.add(ex);
+            }
             // R1
-            ensureOnlyNumbersAndAlphabets(R1, addedRecord.getClassName());
+            try {
+                ensureOnlyNumbersAndAlphabets(R1, addedRecord.getClassName());
+            } catch (RequirementViolationException ex) {
+                violationExceptions.add(ex);
+            }
             // R2
-            ensureOnlyNumbers(R2, addedRecord.getSectionNumber());
+            try {
+                ensureOnlyNumbers(R2, addedRecord.getSectionNumber());
+            } catch (RequirementViolationException ex) {
+                violationExceptions.add(ex);
+            }
             // R3
-            ensureOnlyNumbers(R3, addedRecord.getRoomNumber());
+            try {
+                ensureOnlyNumbers(R3, addedRecord.getRoomNumber());
+            } catch (RequirementViolationException ex) {
+                violationExceptions.add(ex);
+            }
             // R4
-            ensureOnlyNumbers(R4, addedRecord.getPeriodNumber());
+            try {
+                ensureOnlyNumbers(R4, addedRecord.getPeriodNumber());
+            } catch (RequirementViolationException ex) {
+                violationExceptions.add(ex);
+            }
+            
+            throwRequirementViolationExceptionIfExists(violationExceptions);
         }
         
         // no requirement violation if code reaches here
+    }
+    
+    private static void throwRequirementViolationExceptionIfExists(ArrayList<RequirementViolationException> violationExceptions) throws RequirementViolationException {
+        if (violationExceptions.isEmpty())
+            return;
+        
+        StringBuilder sb = new StringBuilder();
+        
+        for (RequirementViolationException violationException : violationExceptions) {
+            sb.append(violationException.getMessage());
+            sb.append("... ");
+        }
+        
+        throw new RequirementViolationException(sb.toString());
     }
     
     /**

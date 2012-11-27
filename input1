@@ -139,15 +139,15 @@
 
 //======================================== [R-6] & [R-7] ========================================
 
-// (1) R-6, R-7 - Valid input - Alphabets for class name
+// (1) R-6, R-7 - Valid input
 // (2) Use RequirementViolationChecker's ensureClassRecordAddedSuccessfully and ensureClassRecordSameAsInput to check results. Throws RequirementViolationException if violation exists.
 ["CS", "Teacher 1", "Fall 2012", "123", "2", "3", "Substitute 1", "M"]
 
-// (1) R-6, R-7 - Valid input - Numbers for class name
+// (1) R-6, R-7 - Valid input
 // (2) Use RequirementViolationChecker's ensureClassRecordAddedSuccessfully and ensureClassRecordSameAsInput to check results. Throws RequirementViolationException if violation exists.
 ["123", "Teacher 1", "Fall 2012", "1", "123", "3", "Substitute 1", "M"]
 
-// (1) R-6, R-7 - Valid input - Alphabets and numbers for class name
+// (1) R-6, R-7 - Valid input
 // (2) Use RequirementViolationChecker's ensureClassRecordAddedSuccessfully and ensureClassRecordSameAsInput to check results. Throws RequirementViolationException if violation exists.
 ["CS123", "Teacher 1", "Fall 2012", "1", "2", "123", "Substitute 1", "M"]
 
