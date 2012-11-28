@@ -27,4 +27,6 @@ File containing test cases: `input2` (converted from Nist file)
 
 File containing test results: `output2`
 
+Automated Solution Design: `Solution.pdf`
+
 [XPath Helper]: https://chrome.google.com/webstore/detail/xpath-helper/hgimnogjllphhhkhlmebbmlgjoejdpjl "XPath Helper"
