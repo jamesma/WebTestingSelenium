@@ -5,8 +5,8 @@ public class Constants {
     public static final String FIREFOX_DRIVER_PROPERTY  = "webdriver.firefox.bin";
     public static final String FIREFOX_BINARY_PATH      = "/Volumes/HD_500GB/Users/james/SeleniumUtilities/Firefox11.0.app/Contents/MacOS/firefox-bin";
     public static final String WEBSITE_ROOT             = "http://localhost:8888/";
-    public static final String INPUT_FILE_NAME          = "input1";
-    public static final String OUTPUT_FILE_NAME         = "output1";
+    public static final String INPUT_FILE_NAME          = "input2";
+    public static final String OUTPUT_FILE_NAME         = "output2";
     public static final String NIST_INPUT_FILE_NAME     = "input2-nist.txt";
     public static final String NIST_OUTPUT_FILE_NAME    = "input2";
     
