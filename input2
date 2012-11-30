@@ -4,7 +4,7 @@
 
 ["CS", "Teacher 3", "Fall 2012", "   ", "   ", "   ", "Substitute 3", "W"]
 
-["CS", "Teacher 4", "Spring 2013", " !#$%&", " !#$%&", " !#$%&", "Substitute 1", "H"]
+["CS", "Teacher 4", "Spring 2013", "!#$%&", "!#$%&", "!#$%&", "Substitute 1", "H"]
 
 ["CS", "Teacher 5", "Fall 2012", "ɠ", "ɠ", "ɠ", "Substitute 2", "F"]
 
@@ -18,11 +18,11 @@
 
 ["123", "Teacher 5", "Spring 2013", "123", "", "   ", "Substitute 3", "H"]
 
-["123", "Teacher 3", "Fall 2012", "", "123", " !#$%&", "Substitute 1", "F"]
+["123", "Teacher 3", "Fall 2012", "", "123", "!#$%&", "Substitute 1", "F"]
 
-["123", "Teacher 2", "Spring 2013", "   ", " !#$%&", "123", "Substitute 2", "T"]
+["123", "Teacher 2", "Spring 2013", "   ", "!#$%&", "123", "Substitute 2", "T"]
 
-["123", "Teacher 1", "Fall 2012", " !#$%&", "   ", "", "Substitute 2", "M"]
+["123", "Teacher 1", "Fall 2012", "!#$%&", "   ", "", "Substitute 2", "M"]
 
 ["123", "Teacher 4", "Spring 2013", "ɠ", "abc", "123abc", "Substitute 1", "W"]
 
@@ -36,13 +36,13 @@
 
 ["CS123", "Teacher 2", "Spring 2013", "123", "   ", "<script>xss attacked</script>", "Substitute 1", "F"]
 
-["CS123", "Teacher 1", "Fall 2012", "", " !#$%&", "   ", "Substitute 3", "M"]
+["CS123", "Teacher 1", "Fall 2012", "", "!#$%&", "   ", "Substitute 3", "M"]
 
 ["CS123", "Teacher 4", "Fall 2012", "   ", "123", "", "Substitute 3", "H"]
 
-["CS123", "Teacher 3", "Fall 2012", " !#$%&", "", "ɠ", "Substitute 3", "T"]
+["CS123", "Teacher 3", "Fall 2012", "!#$%&", "", "ɠ", "Substitute 3", "T"]
 
-["CS123", "Teacher 1", "Spring 2013", "ɠ", "123abc", " !#$%&", "Substitute 2", "T"]
+["CS123", "Teacher 1", "Spring 2013", "ɠ", "123abc", "!#$%&", "Substitute 2", "T"]
 
 ["CS123", "Teacher 5", "Spring 2013", "abc", "123@", "123abc", "Substitute 2", "M"]
 
@@ -52,31 +52,31 @@
 
 ["CS123", "Teacher 5", "Fall 2012", "<script>xss attacked</script>", "<script>xss attacked</script>", "123@", "Substitute 1", "T"]
 
-["", "Teacher 3", "Fall 2012", "123", " !#$%&", "", "Substitute 1", "W"]
+["", "Teacher 3", "Fall 2012", "123", "!#$%&", "", "Substitute 1", "W"]
 
 ["", "Teacher 4", "Spring 2013", "", "   ", "ɠ", "Substitute 2", "H"]
 
 ["", "Teacher 1", "Fall 2012", "   ", "", "<script>xss attacked</script>", "Substitute 3", "M"]
 
-["", "Teacher 2", "Spring 2013", " !#$%&", "123", "   ", "Substitute 2", "F"]
+["", "Teacher 2", "Spring 2013", "!#$%&", "123", "   ", "Substitute 2", "F"]
 
 ["", "Teacher 2", "Fall 2012", "ɠ", "123@", "abc", "Substitute 3", "M"]
 
 ["", "Teacher 4", "Fall 2012", "abc", "123abc", "123", "Substitute 1", "H"]
 
-["", "Teacher 5", "Fall 2012", "123abc", "abc", " !#$%&", "Substitute 2", "T"]
+["", "Teacher 5", "Fall 2012", "123abc", "abc", "!#$%&", "Substitute 2", "T"]
 
 ["", "Teacher 1", "Fall 2012", "123@", "ɠ", "123abc", "Substitute 3", "T"]
 
 ["", "Teacher 2", "Fall 2012", "<script>xss attacked</script>", "<script>xss attacked</script>", "", "Substitute 1", "H"]
 
-["   ", "Teacher 3", "Fall 2012", "123", "ɠ", " !#$%&", "Substitute 2", "M"]
+["   ", "Teacher 3", "Fall 2012", "123", "ɠ", "!#$%&", "Substitute 2", "M"]
 
 ["   ", "Teacher 4", "Spring 2013", "", "abc", "123@", "Substitute 3", "F"]
 
 ["   ", "Teacher 5", "Fall 2012", "   ", "123abc", "ɠ", "Substitute 1", "F"]
 
-["   ", "Teacher 5", "Fall 2012", " !#$%&", "123@", "<script>xss attacked</script>", "Substitute 1", "T"]
+["   ", "Teacher 5", "Fall 2012", "!#$%&", "123@", "<script>xss attacked</script>", "Substitute 1", "T"]
 
 ["   ", "Teacher 3", "Fall 2012", "ɠ", "123", "   ", "Substitute 1", "W"]
 
@@ -84,27 +84,27 @@
 
 ["   ", "Teacher 1", "Fall 2012", "123abc", "   ", "123", "Substitute 1", "H"]
 
-["   ", "Teacher 2", "Fall 2012", "123@", " !#$%&", "123abc", "Substitute 1", "F"]
+["   ", "Teacher 2", "Fall 2012", "123@", "!#$%&", "123abc", "Substitute 1", "F"]
 
 ["   ", "Teacher 1", "Fall 2012", "<script>xss attacked</script>", "<script>xss attacked</script>", "   ", "Substitute 1", "M"]
 
-[" !#$%&", "Teacher 2", "Fall 2012", "123", "abc", "ɠ", "Substitute 1", "M"]
+["!#$%&", "Teacher 2", "Fall 2012", "123", "abc", "ɠ", "Substitute 1", "M"]
 
-[" !#$%&", "Teacher 3", "Spring 2013", "", "ɠ", "<script>xss attacked</script>", "Substitute 2", "W"]
+["!#$%&", "Teacher 3", "Spring 2013", "", "ɠ", "<script>xss attacked</script>", "Substitute 2", "W"]
 
-[" !#$%&", "Teacher 4", "Fall 2012", "   ", "123@", " !#$%&", "Substitute 3", "T"]
+["!#$%&", "Teacher 4", "Fall 2012", "   ", "123@", "!#$%&", "Substitute 3", "T"]
 
-[" !#$%&", "Teacher 1", "Fall 2012", " !#$%&", "123abc", "123@", "Substitute 1", "F"]
+["!#$%&", "Teacher 1", "Fall 2012", "!#$%&", "123abc", "123@", "Substitute 1", "F"]
 
-[" !#$%&", "Teacher 4", "Fall 2012", "ɠ", "", "123", "Substitute 1", "W"]
+["!#$%&", "Teacher 4", "Fall 2012", "ɠ", "", "123", "Substitute 1", "W"]
 
-[" !#$%&", "Teacher 5", "Fall 2012", "abc", "123", "", "Substitute 1", "H"]
+["!#$%&", "Teacher 5", "Fall 2012", "abc", "123", "", "Substitute 1", "H"]
 
-[" !#$%&", "Teacher 3", "Fall 2012", "123abc", " !#$%&", "abc", "Substitute 1", "F"]
+["!#$%&", "Teacher 3", "Fall 2012", "123abc", "!#$%&", "abc", "Substitute 1", "F"]
 
-[" !#$%&", "Teacher 4", "Fall 2012", "123@", "   ", "123abc", "Substitute 1", "M"]
+["!#$%&", "Teacher 4", "Fall 2012", "123@", "   ", "123abc", "Substitute 1", "M"]
 
-[" !#$%&", "Teacher 2", "Fall 2012", "<script>xss attacked</script>", "<script>xss attacked</script>", " !#$%&", "Substitute 1", "W"]
+["!#$%&", "Teacher 2", "Fall 2012", "<script>xss attacked</script>", "<script>xss attacked</script>", "!#$%&", "Substitute 1", "W"]
 
 ["ɠ", "Teacher 3", "Fall 2012", "123", "123abc", "123@", "Substitute 1", "T"]
 
@@ -112,15 +112,15 @@
 
 ["ɠ", "Teacher 1", "Fall 2012", "   ", "ɠ", "", "Substitute 3", "H"]
 
-["ɠ", "Teacher 2", "Fall 2012", " !#$%&", "abc", "<script>xss attacked</script>", "Substitute 1", "W"]
+["ɠ", "Teacher 2", "Fall 2012", "!#$%&", "abc", "<script>xss attacked</script>", "Substitute 1", "W"]
 
 ["ɠ", "Teacher 4", "Fall 2012", "ɠ", "   ", "abc", "Substitute 1", "M"]
 
-["ɠ", "Teacher 5", "Fall 2012", "abc", " !#$%&", "ɠ", "Substitute 1", "M"]
+["ɠ", "Teacher 5", "Fall 2012", "abc", "!#$%&", "ɠ", "Substitute 1", "M"]
 
 ["ɠ", "Teacher 4", "Fall 2012", "123abc", "123", "   ", "Substitute 1", "T"]
 
-["ɠ", "Teacher 1", "Fall 2012", "123@", "", " !#$%&", "Substitute 1", "M"]
+["ɠ", "Teacher 1", "Fall 2012", "123@", "", "!#$%&", "Substitute 1", "M"]
 
 ["ɠ", "Teacher 3", "Fall 2012", "<script>xss attacked</script>", "<script>xss attacked</script>", "123abc", "Substitute 1", "H"]
 
@@ -130,11 +130,11 @@
 
 ["CS!", "Teacher 3", "Fall 2012", "   ", "abc", "123@", "Substitute 3", "M"]
 
-["CS!", "Teacher 2", "Fall 2012", " !#$%&", "ɠ", "123", "Substitute 1", "T"]
+["CS!", "Teacher 2", "Fall 2012", "!#$%&", "ɠ", "123", "Substitute 1", "T"]
 
-["CS!", "Teacher 5", "Fall 2012", "ɠ", " !#$%&", "123@", "Substitute 1", "W"]
+["CS!", "Teacher 5", "Fall 2012", "ɠ", "!#$%&", "123@", "Substitute 1", "W"]
 
-["CS!", "Teacher 5", "Fall 2012", "abc", "   ", " !#$%&", "Substitute 1", "T"]
+["CS!", "Teacher 5", "Fall 2012", "abc", "   ", "!#$%&", "Substitute 1", "T"]
 
 ["CS!", "Teacher 1", "Fall 2012", "123abc", "", "123abc", "Substitute 1", "M"]
 
@@ -148,9 +148,9 @@
 
 ["123/", "Teacher 3", "Fall 2012", "   ", "", "123abc", "Substitute 3", "H"]
 
-["123/", "Teacher 4", "Fall 2012", " !#$%&", "   ", "123@", "Substitute 1", "T"]
+["123/", "Teacher 4", "Fall 2012", "!#$%&", "   ", "123@", "Substitute 1", "T"]
 
-["123/", "Teacher 5", "Fall 2012", "ɠ", " !#$%&", "<script>xss attacked</script>", "Substitute 1", "H"]
+["123/", "Teacher 5", "Fall 2012", "ɠ", "!#$%&", "<script>xss attacked</script>", "Substitute 1", "H"]
 
 ["123/", "Teacher 1", "Fall 2012", "abc", "ɠ", "   ", "Substitute 1", "F"]
 
@@ -166,11 +166,11 @@
 
 ["CS123@", "Teacher 3", "Fall 2012", "   ", "", "abc", "Substitute 3", "T"]
 
-["CS123@", "Teacher 4", "Fall 2012", " !#$%&", "   ", "", "Substitute 1", "F"]
+["CS123@", "Teacher 4", "Fall 2012", "!#$%&", "   ", "", "Substitute 1", "F"]
 
-["CS123@", "Teacher 5", "Fall 2012", "ɠ", " !#$%&", "   ", "Substitute 1", "H"]
+["CS123@", "Teacher 5", "Fall 2012", "ɠ", "!#$%&", "   ", "Substitute 1", "H"]
 
-["CS123@", "Teacher 1", "Fall 2012", "abc", "ɠ", " !#$%&", "Substitute 1", "M"]
+["CS123@", "Teacher 1", "Fall 2012", "abc", "ɠ", "!#$%&", "Substitute 1", "M"]
 
 ["CS123@", "Teacher 1", "Fall 2012", "123abc", "abc", "123@", "Substitute 1", "M"]
 
@@ -184,13 +184,13 @@
 
 ["<script>xss attacked</script>", "Teacher 3", "Fall 2012", "   ", "<script>xss attacked</script>", "123", "Substitute 3", "T"]
 
-["<script>xss attacked</script>", "Teacher 4", "Fall 2012", " !#$%&", "   ", "abc", "Substitute 1", "F"]
+["<script>xss attacked</script>", "Teacher 4", "Fall 2012", "!#$%&", "   ", "abc", "Substitute 1", "F"]
 
-["<script>xss attacked</script>", "Teacher 5", "Fall 2012", "ɠ", " !#$%&", "", "Substitute 1", "H"]
+["<script>xss attacked</script>", "Teacher 5", "Fall 2012", "ɠ", "!#$%&", "", "Substitute 1", "H"]
 
 ["<script>xss attacked</script>", "Teacher 1", "Fall 2012", "abc", "ɠ", "   ", "Substitute 1", "M"]
 
-["<script>xss attacked</script>", "Teacher 1", "Fall 2012", "123abc", "abc", " !#$%&", "Substitute 1", "M"]
+["<script>xss attacked</script>", "Teacher 1", "Fall 2012", "123abc", "abc", "!#$%&", "Substitute 1", "M"]
 
 ["<script>xss attacked</script>", "Teacher 1", "Fall 2012", "123@", "123abc", "ɠ", "Substitute 1", "M"]
 
@@ -202,15 +202,15 @@
 
 ["CS123@", "Teacher 1", "Fall 2012", "<script>xss attacked</script>", "   ", "123", "Substitute 1", "M"]
 
-["CS!", "Teacher 1", "Fall 2012", "<script>xss attacked</script>", " !#$%&", "   ", "Substitute 1", "M"]
+["CS!", "Teacher 1", "Fall 2012", "<script>xss attacked</script>", "!#$%&", "   ", "Substitute 1", "M"]
 
-["123/", "Teacher 1", "Fall 2012", "<script>xss attacked</script>", "ɠ", " !#$%&", "Substitute 1", "M"]
+["123/", "Teacher 1", "Fall 2012", "<script>xss attacked</script>", "ɠ", "!#$%&", "Substitute 1", "M"]
 
-[" !#$%&", "Teacher 1", "Fall 2012", "<script>xss attacked</script>", "abc", "   ", "Substitute 1", "M"]
+["!#$%&", "Teacher 1", "Fall 2012", "<script>xss attacked</script>", "abc", "   ", "Substitute 1", "M"]
 
 ["   ", "Teacher 1", "Fall 2012", "<script>xss attacked</script>", "123abc", "", "Substitute 1", "M"]
 
-["CS123", "Teacher 1", "Fall 2012", " !#$%&", "<script>xss attacked</script>", "123abc", "Substitute 1", "W"]
+["CS123", "Teacher 1", "Fall 2012", "!#$%&", "<script>xss attacked</script>", "123abc", "Substitute 1", "W"]
 
 ["CS", "Teacher 1", "Fall 2012", "ɠ", "<script>xss attacked</script>", "123", "Substitute 1", "M"]
 

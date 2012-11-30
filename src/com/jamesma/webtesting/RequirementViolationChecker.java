@@ -48,6 +48,7 @@ public class RequirementViolationChecker {
      *     check class record is exactly same as input
      * if class record added successfully and input is invalid
      *     check R-1 to R-5 for requirement violations
+     *     check class record is exactly same as input
      * 
      * @param driver
      * @param testCase
@@ -96,6 +97,12 @@ public class RequirementViolationChecker {
             // R4
             try {
                 ensureOnlyNumbers(R4, addedRecord.getPeriodNumber());
+            } catch (RequirementViolationException ex) {
+                violationExceptions.add(ex);
+            }
+            // R7
+            try {
+                ensureClassRecordSameAsInput(addedRecord, R7, testCase);
             } catch (RequirementViolationException ex) {
                 violationExceptions.add(ex);
             }
@@ -265,7 +272,7 @@ public class RequirementViolationChecker {
         periodNumbers =  driver.findElements(By.xpath("/html/body/table[2]/tbody/tr[2]/td[@class='w']/table/tbody/tr/td/form/table[1]/tbody/tr/td/table[@class='dynamiclist']/tbody/tr//td[7]"));
         dayOfTheWeeks =  driver.findElements(By.xpath("/html/body/table[2]/tbody/tr[2]/td[@class='w']/table/tbody/tr/td/form/table[1]/tbody/tr/td/table[@class='dynamiclist']/tbody/tr//td[8]"));
         substitutes =    driver.findElements(By.xpath("/html/body/table[2]/tbody/tr[2]/td[@class='w']/table/tbody/tr/td/form/table[1]/tbody/tr/td/table[@class='dynamiclist']/tbody/tr//td[9]"));
-
+        
         return new ClassRecord(
                 classnames      .get(normalizedIndex).getText(), 
                 teachers        .get(normalizedIndex).getText(), 
@@ -291,21 +298,23 @@ public class RequirementViolationChecker {
         
         ArrayList<String> mismatches = new ArrayList<String>();
         
-        if (!classRecord.getClassName().equals(testCase.getClassName()))
+        // NOTE: remove leading and trailing whitespaces from classRecord using trim() as 
+        // Selenium's WebElement doesn't expose API that lets you grab whitespace-only text fields
+        if (!classRecord.getClassName().equals(testCase.getClassName().trim()))
             mismatches.add(CLASSNAME);
-        if (!classRecord.getTeacher().equals(testCase.getTeacher()))
+        if (!classRecord.getTeacher().equals(testCase.getTeacher().trim()))
             mismatches.add(TEACHER);
-        if (!classRecord.getSemester().equals(testCase.getSemester()))
+        if (!classRecord.getSemester().equals(testCase.getSemester().trim()))
             mismatches.add(SEMESTER);
-        if (!classRecord.getSectionNumber().equals(testCase.getSectionNumber()))
+        if (!classRecord.getSectionNumber().equals(testCase.getSectionNumber().trim()))
             mismatches.add(SECTION_NUMBER);
-        if (!classRecord.getRoomNumber().equals(testCase.getRoomNumber()))
+        if (!classRecord.getRoomNumber().equals(testCase.getRoomNumber().trim()))
             mismatches.add(ROOM_NUMBER);
-        if (!classRecord.getPeriodNumber().equals(testCase.getPeriodNumber()))
+        if (!classRecord.getPeriodNumber().equals(testCase.getPeriodNumber().trim()))
             mismatches.add(PERIOD_NUMBER);
-        if (!classRecord.getDayOfTheWeek().equals(testCase.getDayOfTheWeek()))
+        if (!classRecord.getDayOfTheWeek().equals(testCase.getDayOfTheWeek().trim()))
             mismatches.add(DAY_OF_THE_WEEK);
-        if (!classRecord.getSubstitute().equals(testCase.getSubstitute()))
+        if (!classRecord.getSubstitute().equals(testCase.getSubstitute().trim()))
             mismatches.add(SUBSTITUTE);
         
         // build exception message with mismatches

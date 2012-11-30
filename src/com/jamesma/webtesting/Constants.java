@@ -7,7 +7,7 @@ public class Constants {
     public static final String WEBSITE_ROOT             = "http://localhost:8888/";
     public static final String INPUT_FILE_NAME          = "input2";
     public static final String OUTPUT_FILE_NAME         = "output2";
-    public static final String NIST_INPUT_FILE_NAME     = "input2-nist.txt";
+    public static final String NIST_INPUT_FILE_NAME     = "input2-nist-str2.txt";
     public static final String NIST_OUTPUT_FILE_NAME    = "input2";
     
     public static final String ADMIN_USERNAME = "admin";

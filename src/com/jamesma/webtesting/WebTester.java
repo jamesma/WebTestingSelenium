@@ -425,7 +425,6 @@ public class WebTester {
     public static void main(String[] args) {
         WebTester webTester = new WebTester(WEBSITE_ROOT);
         webTester.beginTest();
-        
 //        webTester.deleteAllClasses();
 //        NistConvertor.convertNistToAddClassTestCaseFormat(NIST_INPUT_FILE_NAME, NIST_OUTPUT_FILE_NAME);
     }
